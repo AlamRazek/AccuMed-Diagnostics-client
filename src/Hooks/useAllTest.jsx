@@ -3,20 +3,19 @@ import useAxiosPublic from "./useAxiosPublic";
 
 const useAllTest = () => {
   const axiosPublic = useAxiosPublic();
-
   const {
-    data: test = [],
-    isLoading: loading,
+    data: tests = [],
+    isPending: loading,
     refetch,
   } = useQuery({
     queryKey: ["test"],
     queryFn: async () => {
-      const res = axiosPublic.get("/test");
+      const res = await axiosPublic.get("/test");
       return res.data;
     },
   });
 
-  return [test, loading, refetch];
+  return [tests, loading, refetch];
 };
 
 export default useAllTest;

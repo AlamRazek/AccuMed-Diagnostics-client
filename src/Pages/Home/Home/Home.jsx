@@ -1,7 +1,9 @@
+import AllTest from "./Services/AllTest";
+
 const Home = () => {
   return (
     <div>
-      <h2 className="text-center text-3xl">Home Page</h2>
+      <AllTest></AllTest>
     </div>
   );
 };

@@ -1,16 +1,18 @@
-import { useForm } from "react-hook-form";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
-
+import { useLoaderData } from "react-router-dom";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { useForm } from "react-hook-form";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
-const AddTest = () => {
+const UpdateTest = () => {
   const { register, handleSubmit, reset } = useForm();
+  const { name, _id, price, image, slots, category, details } = useLoaderData();
+  console.log(name);
+
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
 
@@ -32,24 +34,25 @@ const AddTest = () => {
     });
     if (res.data.success) {
       // now send the menu the data menu item data with the url
-      const testForm = {
+      const updatedTestForm = {
         name: data.name,
-        date: data.date,
         category: data.category,
         price: parseFloat(data.price),
         details: data.details,
+        date: data.date,
         slots: parseFloat(data.slots),
         image: res.data.data.display_url,
       };
-      const testRes = await axiosSecure.post("/test", testForm);
+      console.log(updatedTestForm);
+      const testRes = await axiosSecure.patch(`/test/${_id}`, updatedTestForm);
       console.log(testRes.data);
-      if (testRes.data.insertedId) {
+      if (testRes.data.modifiedCount > 0) {
         reset();
         // show success popup
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: `${data.name} is added `,
+          title: `${data.name} is Updated `,
           showConfirmButton: false,
           timer: 1500,
         });
@@ -62,7 +65,7 @@ const AddTest = () => {
     <div>
       <div>
         <h2 className="text-center py-2 md:py-6 my-2 md:my-6 font-bold text-2xl bg-slate-800 text-white">
-          Add a Test
+          PLease Update the test Form
         </h2>
       </div>
       <div>
@@ -73,6 +76,7 @@ const AddTest = () => {
             </div>
             <input
               type="text"
+              defaultValue={name}
               placeholder="Test Name"
               {...register("name", { required: true })}
               required
@@ -88,6 +92,7 @@ const AddTest = () => {
               </div>
               <input
                 type="number"
+                defaultValue={price}
                 placeholder="price"
                 {...register("price", { required: true })}
                 className="input input-bordered w-full"
@@ -99,6 +104,7 @@ const AddTest = () => {
               </div>
               <input
                 type="number"
+                defaultValue={slots}
                 placeholder="slots"
                 {...register("slots", { required: true })}
                 className="input input-bordered w-full"
@@ -114,6 +120,7 @@ const AddTest = () => {
               {...register("details", { required: true })}
               className="textarea textarea-bordered h-24"
               placeholder="Bio"
+              defaultValue={details}
             ></textarea>
           </label>
           <label className="form-control">
@@ -124,8 +131,8 @@ const AddTest = () => {
             </div>
             <input
               type="date"
-              {...register("date", { required: true })}
               name="date"
+              {...register("date", { required: true })}
               min={currentDate}
               defaultValue={currentDate}
               required
@@ -141,11 +148,11 @@ const AddTest = () => {
             />
           </div>
 
-          <button className="btn">Add Test</button>
+          <button className="btn">Update</button>
         </form>
       </div>
     </div>
   );
 };
 
-export default AddTest;
+export default UpdateTest;

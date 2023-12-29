@@ -29,7 +29,7 @@ const NavBar = () => {
       </li>
       <li>
         <NavLink
-          to="/allTest"
+          to="/allTests"
           style={({ isActive }) => ({
             color: isActive ? "#fff" : "#545e6f",
             background: isActive ? "#7600dc" : "",
@@ -38,6 +38,7 @@ const NavBar = () => {
           All Test
         </NavLink>
       </li>
+
       <li>
         <NavLink
           to="/dashboard"

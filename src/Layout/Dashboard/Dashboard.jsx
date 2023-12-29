@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { FaBook, FaCalendar, FaHouse, FaUser } from "react-icons/fa6";
+import { FaBook, FaCalendar, FaFile, FaHouse, FaUser } from "react-icons/fa6";
 
-import useAdmin from "../../Hooks/UseAdmin";
+import useAdmin from "../../hooks/UseAdmin";
 
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
@@ -24,6 +24,12 @@ const Dashboard = () => {
                   Add a Test
                 </NavLink>
               </li>
+              <li>
+                <NavLink to="/dashboard/allTest">
+                  <FaHouse></FaHouse>
+                  All Test
+                </NavLink>
+              </li>
             </>
           ) : (
             <>
@@ -40,8 +46,14 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/testResult">
+                <NavLink to="/dashboard/myReservations">
                   <FaBook></FaBook>
+                  Reservations
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/testResult">
+                  <FaFile></FaFile>
                   Test Result
                 </NavLink>
               </li>
