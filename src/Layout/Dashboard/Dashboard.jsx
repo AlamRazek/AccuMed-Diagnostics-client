@@ -2,6 +2,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { FaBook, FaCalendar, FaFile, FaHouse, FaUser } from "react-icons/fa6";
 
 import useAdmin from "../../hooks/UseAdmin";
+import AllUsers from "../../Pages/AdminDashboard/AllUsers";
 
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
@@ -9,13 +10,32 @@ const Dashboard = () => {
   return (
     <div className="flex">
       <div className=" w-64 min-h-screen bg-orange-400">
-        <ul className="menu p-4">
+        <ul className="menu lg:p-4">
           {isAdmin ? (
             <>
-              <li>
+              <li defaultChecked>
                 <NavLink to="/dashboard/allUsers">
                   <FaHouse></FaHouse>
                   All User
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink to="/dashboard/allTest">
+                  <FaHouse></FaHouse>
+                  All Test
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/">
+                  <FaHouse></FaHouse>
+                  Reservations
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/allBanner">
+                  <FaHouse></FaHouse>
+                  All Banner
                 </NavLink>
               </li>
               <li>
@@ -25,9 +45,9 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/allTest">
+                <NavLink to="/dashboard/banner">
                   <FaHouse></FaHouse>
-                  All Test
+                  Add a Banner
                 </NavLink>
               </li>
             </>
@@ -69,7 +89,7 @@ const Dashboard = () => {
         </ul>
       </div>
       {/*  dashboard content */}
-      <div className="flex-1 p-8">
+      <div className="flex-1 lg:p-8">
         <Outlet></Outlet>
       </div>
     </div>

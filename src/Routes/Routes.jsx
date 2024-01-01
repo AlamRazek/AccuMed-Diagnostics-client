@@ -16,6 +16,8 @@ import Reservations from "../Pages/AdminDashboard/Resevations/Reservations";
 import TestDetails from "../Pages/Home/Home/Services/TestDetails";
 import AllTests from "../Pages/AllTests/AllTests";
 import MyReservations from "../Pages/MyReservations/MyReservations";
+import AddBanner from "../Pages/AdminDashboard/Banner/AddBanner";
+import AllBanner from "../Pages/AdminDashboard/Banner/AllBanner";
 
 export const router = createBrowserRouter([
   {
@@ -116,6 +118,30 @@ export const router = createBrowserRouter([
             element: (
               <AdminRoutes>
                 <AdminAllTest></AdminAllTest>
+              </AdminRoutes>
+            ),
+          },
+          {
+            path: "/dashboard/banner",
+            element: (
+              <AdminRoutes>
+                <AddBanner></AddBanner>
+              </AdminRoutes>
+            ),
+          },
+          {
+            path: "/dashboard/allBanner",
+            element: (
+              <AdminRoutes>
+                <AllBanner></AllBanner>
+              </AdminRoutes>
+            ),
+          },
+          {
+            path: "/dashboard/reservations",
+            element: (
+              <AdminRoutes>
+                <AllBanner></AllBanner>
               </AdminRoutes>
             ),
           },
