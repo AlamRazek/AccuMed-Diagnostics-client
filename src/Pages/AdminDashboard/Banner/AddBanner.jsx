@@ -22,16 +22,15 @@ const AddBanner = () => {
 
     if (res.data.success) {
       // now send the menu the data menu item data with the url
-      const testForm = {
+      const testBanner = {
         title: data.title,
-
-        price: parseFloat(data.price),
+        coupon: data.coupon,
+        rate: data.rate,
         details: data.details,
-
         image: res.data.data.display_url,
         isActive: "false",
       };
-      const testRes = await axiosSecure.post("/test", testForm);
+      const testRes = await axiosSecure.post("/banners", testBanner);
       console.log(testRes.data);
       if (testRes.data.insertedId) {
         reset();
@@ -39,7 +38,7 @@ const AddBanner = () => {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: `${data.name} is added `,
+          title: `${data.title} is added `,
           showConfirmButton: false,
           timer: 1500,
         });

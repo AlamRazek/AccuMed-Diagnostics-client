@@ -1,7 +1,7 @@
 import React from "react";
 
 const AllBanner = () => {
-  return <div>All banner</div>;
+  return <div></div>;
 };
 
 export default AllBanner;
