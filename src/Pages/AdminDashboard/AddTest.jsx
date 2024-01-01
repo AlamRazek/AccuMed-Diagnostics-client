@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
@@ -35,7 +35,7 @@ const AddTest = () => {
       const testForm = {
         name: data.name,
         date: data.date,
-        category: data.category,
+
         price: parseFloat(data.price),
         details: data.details,
         slots: parseFloat(data.slots),

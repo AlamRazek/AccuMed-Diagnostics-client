@@ -43,14 +43,7 @@ export const router = createBrowserRouter([
         path: "/allTests",
         element: <AllTests></AllTests>,
       },
-      {
-        path: "/allTests",
-        element: (
-          <PrivateRoutes>
-            <AllTests></AllTests>
-          </PrivateRoutes>
-        ),
-      },
+
       {
         path: "/card/details/:id",
         element: (

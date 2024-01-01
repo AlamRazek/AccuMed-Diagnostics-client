@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
+
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -40,12 +41,12 @@ const AllUsers = () => {
       confirmButtonText: "Yes, block user!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.put(`/users/${user._id}`).then((res) => {
+        axiosSecure.patch(`/users/${user._id}`).then((res) => {
           if (res.data.modifiedCount > 0) {
             refetch();
             Swal.fire({
-              title: "Blocked!",
-              text: "User has been Blocked.",
+              title: "Are you Sure",
+              text: `User has been blocked.`,
               icon: "success",
             });
           }
