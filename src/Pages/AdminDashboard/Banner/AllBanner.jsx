@@ -32,8 +32,8 @@ const AllBanner = () => {
               text: "Your file has been deleted.",
               icon: "success",
             });
-            refetch();
           }
+          refetch();
         });
       }
     });
