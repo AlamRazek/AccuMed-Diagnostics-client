@@ -25,7 +25,7 @@ const AddBanner = () => {
       const testBanner = {
         title: data.title,
         coupon: data.coupon,
-        rate: data.rate,
+        rate: parseFloat(data.rate),
         details: data.details,
         image: res.data.data.display_url,
         isActive: "false",
