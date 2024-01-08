@@ -4,12 +4,12 @@ const TestCards = ({ data }) => {
   const { name, price, image, _id } = data;
   return (
     <div className="p-2 my-2 text-center">
-      <div className="card card-compact max-w-96 bg-base-300 ">
+      <div className="card card-compact max-w-96 bg-base-100 shadow-md">
         <figure className="">
           <img
             src={image}
             alt="image"
-            className="h-[300px] w-[350px] p-4 rounded-xl"
+            className="h-[300px] w-[350px] p-4 rounded-xl "
           />
         </figure>
         <div className="card-body ">

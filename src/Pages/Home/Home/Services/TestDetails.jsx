@@ -1,15 +1,16 @@
 import { useContext, useEffect, useState } from "react";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../../provider/AuthProvider";
 import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import useAllTest from "../../../../hooks/useAllTest";
 import Modal from "./Modal";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const TestDetails = () => {
   //  const [, , refetch] = useAllTest();
   const navigate = useNavigate();
-
+  const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
   const { user } = useContext(AuthContext);
   const data = useLoaderData();
@@ -17,6 +18,10 @@ const TestDetails = () => {
 
   const availableSlots = data.slots;
 
+  const [promocode, setPromoCode] = useState("");
+  const [originalPrice, setOriginalPrice] = useState(price);
+  const [discountedPrice, setDiscountedPrice] = useState(originalPrice);
+  const [discountPercentage, setDiscountPercentage] = useState(null);
   /*   const [currentDate, setCurrentDate] = useState("");
 
   useEffect(() => {
@@ -25,11 +30,30 @@ const TestDetails = () => {
     setCurrentDate(formattedDate);
   }, []); */
 
+  const handlePromoCode = async (e) => {
+    e.preventDefault();
+    await axiosSecure.post(`/banner/promo-code/${promocode}`).then((res) => {
+      if (res.status === 200) {
+        const data = res.data;
+        console.log(data);
+        const newDiscountedPrice =
+          originalPrice - (originalPrice * data.rate) / 100;
+        setOriginalPrice(newDiscountedPrice);
+        setDiscountedPrice(newDiscountedPrice);
+        setDiscountPercentage(data.rate);
+      } else {
+        // Handle invalid promo code
+        setDiscountedPrice(originalPrice);
+        setDiscountPercentage(null);
+      }
+    });
+  };
+
   const handleReserve = async (e) => {
     e.preventDefault();
     const ReservationDetails = {
       name,
-      price,
+      price: originalPrice,
       slots,
       details,
       date,
@@ -46,12 +70,10 @@ const TestDetails = () => {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: `${data.name} is added to `,
+          title: `${data.name} is added to Reservations`,
           showConfirmButton: false,
           timer: 1800,
         });
-
-        navigate("/allTests");
       }
     });
   };
@@ -139,18 +161,30 @@ const TestDetails = () => {
               </button>
             </form>
             <h3 className="font-bold text-lg">Use your coupon code here:</h3>
+            <h2>Price: {originalPrice}</h2>
             <div>
-              <input
-                type="text"
-                className="input input-bordered w-[80%] my-4"
-              />
+              <form className="join my-4">
+                <input
+                  className="input input-bordered join-item"
+                  placeholder="Promo Code"
+                  onChange={(e) => setPromoCode(e.target.value)}
+                />
+                <button
+                  className="btn join-item rounded-r-full"
+                  onClick={handlePromoCode}
+                >
+                  Apply Promo
+                </button>
+              </form>
             </div>
-            <button
-              className="btn  bg-primary text-white"
-              onClick={handleSubmit}
-            >
-              Submit
-            </button>
+            <Link>
+              <button
+                className="btn  bg-primary text-white"
+                onClick={handleSubmit}
+              >
+                Pay
+              </button>
+            </Link>
           </div>
         </dialog>
       </div>

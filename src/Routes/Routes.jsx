@@ -18,6 +18,7 @@ import AllTests from "../Pages/AllTests/AllTests";
 import MyReservations from "../Pages/MyReservations/MyReservations";
 import AddBanner from "../Pages/AdminDashboard/Banner/AddBanner";
 import AllBanner from "../Pages/AdminDashboard/Banner/AllBanner";
+import Payment from "../Pages/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +47,7 @@ export const router = createBrowserRouter([
         element: <AllTests></AllTests>,
       },
 
+      // normal user routes
       {
         path: "/card/details/:id",
         element: (
@@ -73,8 +75,6 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         children: [
-          // normal user routes
-
           // admin dashboard
           {
             path: "/dashboard/addTest",
@@ -95,14 +95,12 @@ export const router = createBrowserRouter([
               await fetch(`http://localhost:5000/card/details/${params.id}`),
           },
           {
-            path: "/dashboard/reservations/:id",
+            path: "/dashboard/reservations",
             element: (
               <AdminRoutes>
                 <Reservations></Reservations>
               </AdminRoutes>
             ),
-            loader: async ({ params }) =>
-              await fetch(`http://localhost:5000/card/details/${params.id}`),
           },
 
           {
@@ -144,6 +142,11 @@ export const router = createBrowserRouter([
                 <AllBanner></AllBanner>
               </AdminRoutes>
             ),
+          },
+          // normal user routes
+          {
+            path: "/dashboard/payment",
+            element: <Payment></Payment>,
           },
         ],
       },

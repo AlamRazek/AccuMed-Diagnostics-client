@@ -2,8 +2,10 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { FaTrash } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const AllBanner = () => {
+  const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
 
   const { data: banners = [], refetch } = useQuery({
@@ -39,6 +41,20 @@ const AllBanner = () => {
     });
   };
 
+  const handleBanner = (user) => {
+    console.log(user._id);
+    axiosSecure.put(`/banners/${user._id}`).then((res) => {
+      if (res.data && res.data.modifiedCount > 0) {
+        Swal.fire({
+          title: "Activated!",
+          text: "Banner has been Changed.",
+          icon: "success",
+        });
+      }
+      refetch();
+    });
+  };
+
   return (
     <div>
       <div>
@@ -58,6 +74,7 @@ const AllBanner = () => {
                 <th>Title</th>
                 <th>Coupon Code</th>
                 <th>Coupon rate</th>
+                <th>Set</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -81,6 +98,20 @@ const AllBanner = () => {
                   <td>{data.rate}%</td>
 
                   <td>
+                    {data.isActive === "false" ? (
+                      <button
+                        className="btn btn-md btn-accent"
+                        onClick={() => handleBanner(data)}
+                      >
+                        Set
+                      </button>
+                    ) : (
+                      <button disabled>Active</button>
+                    )}
+                  </td>
+
+                  <td>
+                    {" "}
                     <button
                       onClick={() => handleDelete(data._id)}
                       className="btn  btn-md bg-orange-500"
@@ -88,8 +119,6 @@ const AllBanner = () => {
                       <FaTrash className="text-white "></FaTrash>
                     </button>
                   </td>
-
-                  <td></td>
                 </tr>
               ))}
             </tbody>

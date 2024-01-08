@@ -15,6 +15,7 @@ const AllTests = () => {
     const formattedDate = currentDate.toISOString().split("T")[0];
     setCurrentDate(formattedDate);
   }, []);
+
   useEffect(() => {
     const filterTest = test.filter((data) => data.date > currentDate);
     setFilterTest(filterTest);
