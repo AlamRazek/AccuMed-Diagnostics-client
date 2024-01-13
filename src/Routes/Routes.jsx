@@ -145,7 +145,7 @@ export const router = createBrowserRouter([
           },
           // normal user routes
           {
-            path: "/dashboard/payment",
+            path: "/dashboard/reservation/payment",
             element: <Payment></Payment>,
           },
         ],

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Banner = ({ data }) => {
   const { isActive, image, title, rate, coupon, details } = data;
-  console.log(data);
+
   return (
     <div>
       {isActive === "true" && (

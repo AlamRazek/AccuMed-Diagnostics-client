@@ -50,17 +50,6 @@ const NavBar = () => {
           Dashboard
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/dashboard/payment"
-          style={({ isActive }) => ({
-            color: isActive ? "#fff" : "#545e6f",
-            background: isActive ? "#7600dc" : "",
-          })}
-        >
-          pay
-        </NavLink>
-      </li>
     </>
   );
 

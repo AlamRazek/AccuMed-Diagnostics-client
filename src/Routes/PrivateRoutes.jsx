@@ -16,8 +16,8 @@ const PrivateRoutes = ({ children }) => {
       return res.data;
     },
   });
-  console.log(userData);
-  if (!userData.user) {
+
+  if (!userData?.user) {
     return <Navigate to="/" replace></Navigate>;
   }
 
