@@ -12,14 +12,14 @@ const ReservationCard = ({ data, index, refetch }) => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Yes, cancel it!",
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/reservations/${id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             Swal.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
+              title: "Reservation Canceled.",
+              text: "Your reservation has been canceled.",
               icon: "success",
             });
           }

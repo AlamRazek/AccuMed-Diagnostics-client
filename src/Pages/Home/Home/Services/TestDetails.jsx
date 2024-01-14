@@ -3,9 +3,9 @@ import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../../provider/AuthProvider";
 import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
-import useAllTest from "../../../../hooks/useAllTest";
-import Modal from "./Modal";
+
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import useAllTest from "../../../../hooks/useAllTest";
 
 const TestDetails = () => {
   //  const [, , refetch] = useAllTest();
@@ -22,6 +22,7 @@ const TestDetails = () => {
   const [originalPrice, setOriginalPrice] = useState(price);
   const [discountedPrice, setDiscountedPrice] = useState(originalPrice);
   const [discountPercentage, setDiscountPercentage] = useState(null);
+  const { refetch } = useAllTest();
   /*   const [currentDate, setCurrentDate] = useState("");
 
   useEffect(() => {
@@ -74,6 +75,7 @@ const TestDetails = () => {
           showConfirmButton: false,
           timer: 1800,
         });
+        navigate("/allTests");
       }
     });
   };
@@ -85,6 +87,7 @@ const TestDetails = () => {
         if (response.data.modifiedCount > 0) {
           console.log("successful:", response.data);
         }
+        refetch();
       })
       .catch((error) => {
         console.log("error:", error);

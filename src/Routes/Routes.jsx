@@ -19,6 +19,7 @@ import MyReservations from "../Pages/MyReservations/MyReservations";
 import AddBanner from "../Pages/AdminDashboard/Banner/AddBanner";
 import AllBanner from "../Pages/AdminDashboard/Banner/AllBanner";
 import Payment from "../Pages/Payment/Payment";
+import PaymentHistory from "../paymentHistory/paymentHistory";
 
 export const router = createBrowserRouter([
   {
@@ -58,14 +59,6 @@ export const router = createBrowserRouter([
         loader: async ({ params }) =>
           await fetch(`http://localhost:5000/card/details/${params.id}`),
       },
-      {
-        path: "/dashboard/myReservations",
-        element: (
-          <PrivateRoutes>
-            <MyReservations></MyReservations>
-          </PrivateRoutes>
-        ),
-      },
 
       {
         path: "/dashboard",
@@ -75,6 +68,14 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         children: [
+          {
+            path: "/dashboard/myReservations",
+            element: <MyReservations></MyReservations>,
+          },
+          {
+            path: "/dashboard/paymentHistory",
+            element: <PaymentHistory></PaymentHistory>,
+          },
           // admin dashboard
           {
             path: "/dashboard/addTest",

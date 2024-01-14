@@ -84,6 +84,12 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li>
+                <NavLink to="/dashboard/paymentHistory">
+                  <FaFile></FaFile>
+                  Payment History
+                </NavLink>
+              </li>
+              <li>
                 <NavLink to="/dashboard/updateProfile">
                   <FaWrench></FaWrench>
                   Update Profile

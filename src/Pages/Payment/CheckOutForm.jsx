@@ -5,6 +5,7 @@ import useAllReservations from "../../hooks/useAllReservations";
 import { AuthContext } from "../../provider/AuthProvider";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const CheckOutForm = () => {
   const [error, setError] = useState("");
@@ -15,6 +16,7 @@ const CheckOutForm = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const { resevations, refetch } = useAllReservations();
+  const navigate = useNavigate();
   const price = resevations?.reduce((total, item) => total + item.price, 0);
   /*  const price = Array.isArray(resevations)
     ? resevations.reduce((total, item) => total + (item.price || 0), 0)
@@ -84,6 +86,7 @@ const CheckOutForm = () => {
           date: new Date(), //utc date convert
           reservationId: resevations?.map((data) => data._id),
           reservationName: resevations?.map((data) => data.name),
+          reservations: resevations,
         };
 
         const res = await axiosSecure.post("/payments", payment);
@@ -97,6 +100,7 @@ const CheckOutForm = () => {
             showConfirmButton: false,
             timer: 1500,
           });
+          navigate("/dashboard/paymentHistory");
         }
       }
     }

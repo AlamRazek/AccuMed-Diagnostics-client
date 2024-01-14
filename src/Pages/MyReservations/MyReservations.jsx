@@ -16,6 +16,7 @@ const MyReservations = () => {
       return res.data;
     },
   });
+  const price = resevations?.reduce((total, item) => total + item.price, 0);
 
   const handleCancel = (id) => {
     Swal.fire({
@@ -25,14 +26,14 @@ const MyReservations = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Yes, cancel it!",
     }).then((result) => {
       if (result.isConfirmed) {
         axiosPublic.delete(`/reservations/${id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             Swal.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
+              title: "Canceled!",
+              text: "Your reservation has been canceled.",
               icon: "success",
             });
           }
@@ -44,8 +45,9 @@ const MyReservations = () => {
 
   return (
     <div>
+      <p className="font-bold my-2">Total Price: ${price}</p>
       <button className="btn">
-        <NavLink to="/dashboard/reservation/payment">pay</NavLink>
+        <NavLink to="/dashboard/reservation/payment">pay </NavLink>
       </button>
       <div className="overflow-x-auto">
         <table className="table table-zebra">
