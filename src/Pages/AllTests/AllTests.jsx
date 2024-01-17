@@ -44,6 +44,9 @@ const AllTests = () => {
           Search
         </button>
       </label>
+      <div className="my-2 py-2 text-2xl lg:text-3xl font-bold text-center bg-violet-800 text-white rounded-md shadow-md">
+        All The Available Test
+      </div>
       <div className="grid md:grid-cols-2 lg:grid-cols-3">
         {filterTest?.map((data) => (
           <TestCards key={data._id} data={data}></TestCards>

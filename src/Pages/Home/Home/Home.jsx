@@ -1,4 +1,5 @@
 import BannerImage from "../../AdminDashboard/Banner/BannerImage";
+import Swipper from "../SwipperJs/swipper";
 import AllTest from "./Services/AllTest";
 
 const Home = () => {
@@ -8,6 +9,9 @@ const Home = () => {
         <BannerImage></BannerImage>
       </div>
       <AllTest></AllTest>
+      <div>
+        <Swipper></Swipper>
+      </div>
     </div>
   );
 };

@@ -82,8 +82,12 @@ const NavBar = () => {
             {navLinks}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">
-          AccuMed <br /> Diagnostics
+        <a>
+          <img
+            src="https://i.ibb.co/2PGw2Q3/logo-no-background.png"
+            alt=""
+            className="max-h-10 m-2"
+          />
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
