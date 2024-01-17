@@ -65,7 +65,7 @@ const MyReservations = () => {
               <tr key={data._id}>
                 <th>{index + 1}</th>
                 <td>{data.name}</td>
-                <td>{data.name}</td>
+                <td>{data.date}</td>
                 <td>
                   <button
                     className="btn btn-warning btn-sm"

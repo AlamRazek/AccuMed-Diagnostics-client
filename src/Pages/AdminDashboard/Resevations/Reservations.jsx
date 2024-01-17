@@ -6,9 +6,9 @@ const Reservations = () => {
   const axiosPublic = useAxiosPublic();
 
   const { data: reservations = [], refetch } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["appointment"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/reservations");
+      const res = await axiosPublic.get("/appointment");
       return res.data;
     },
   });

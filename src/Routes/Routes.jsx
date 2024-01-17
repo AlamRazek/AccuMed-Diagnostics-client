@@ -20,11 +20,17 @@ import AddBanner from "../Pages/AdminDashboard/Banner/AddBanner";
 import AllBanner from "../Pages/AdminDashboard/Banner/AllBanner";
 import Payment from "../Pages/Payment/Payment";
 import PaymentHistory from "../paymentHistory/paymentHistory";
+import UpcomingAppointment from "../Pages/UpcomingAppointment/UpcomingAppointment";
+import Error from "../Pages/Error/Error";
+import MyProfile from "../Pages/Profile/MyProfile";
+import UpdateProfile from "../Pages/Profile/UpdateProfile";
+import TestResult from "../Pages/TestResult/TestResult";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
@@ -68,13 +74,51 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         children: [
+          // normal user
+
+          {
+            path: "/dashboard/myProfile",
+            element: (
+              <PrivateRoutes>
+                <MyProfile></MyProfile>
+              </PrivateRoutes>
+            ),
+          },
+          {
+            path: "/dashboard/updateProfile",
+            element: <UpdateProfile></UpdateProfile>,
+          },
           {
             path: "/dashboard/myReservations",
-            element: <MyReservations></MyReservations>,
+            element: (
+              <PrivateRoutes>
+                <MyReservations></MyReservations>
+              </PrivateRoutes>
+            ),
+          },
+          {
+            path: "/dashboard/testResult",
+            element: (
+              <PrivateRoutes>
+                <TestResult></TestResult>
+              </PrivateRoutes>
+            ),
           },
           {
             path: "/dashboard/paymentHistory",
-            element: <PaymentHistory></PaymentHistory>,
+            element: (
+              <PrivateRoutes>
+                <PaymentHistory></PaymentHistory>
+              </PrivateRoutes>
+            ),
+          },
+          {
+            path: "/dashboard/myAppoinment",
+            element: (
+              <PrivateRoutes>
+                <UpcomingAppointment></UpcomingAppointment>
+              </PrivateRoutes>
+            ),
           },
           // admin dashboard
           {

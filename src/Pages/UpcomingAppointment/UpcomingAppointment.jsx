@@ -1,38 +1,35 @@
+import { useQuery } from "@tanstack/react-query";
 import useAllReservations from "../../hooks/useAllReservations";
+import Appointments from "./Appoinments";
+import { useContext } from "react";
+import { AuthContext } from "../../provider/AuthProvider";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const UpcomingAppointment = () => {
-  const appointments = useAllReservations();
+  const { user } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
+
+  const { data: appointments = [], refetch } = useQuery({
+    queryKey: ["appointments", user.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/payments/${user.email}`);
+      return res.data;
+    },
+  });
 
   return (
-    <div className="overflow-x-auto">
-      <table className="table table-zebra">
-        {/* head */}
-        <thead>
-          <tr>
-            <th></th>
-            <th>Test Name</th>
-            <th>Date</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {appointments?.map((data, index) => (
-            <tr key={data._id}>
-              <th>{index + 1}</th>
-              <td>{data.name}</td>
-              <td>{data.name}</td>
-              <td>
-                <button
-                  className="btn btn-warning btn-sm"
-                  onClick={() => handleCancel(data._id)}
-                >
-                  Cancel
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div>
+      {appointments ? (
+        appointments?.map((data) => (
+          <Appointments
+            key={data._id}
+            data={data}
+            refetch={refetch}
+          ></Appointments>
+        ))
+      ) : (
+        <p>No Appointment</p>
+      )}
     </div>
   );
 };

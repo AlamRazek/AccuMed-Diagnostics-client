@@ -15,7 +15,7 @@ const ReservationCard = ({ data, index, refetch }) => {
       confirmButtonText: "Yes, cancel it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/reservations/${id}`).then((res) => {
+        axiosSecure.delete(`/appointmentResult/${id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             Swal.fire({
               title: "Reservation Canceled.",
@@ -40,7 +40,7 @@ const ReservationCard = ({ data, index, refetch }) => {
       confirmButtonText: "Yes, Submit it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.patch(`/reservations/${id}`).then((res) => {
+        axiosSecure.patch(`/appointmentResult/${id}`).then((res) => {
           if (res.data.modifiedCount > 0) {
             Swal.fire({
               title: "Submitted!",
@@ -56,48 +56,58 @@ const ReservationCard = ({ data, index, refetch }) => {
 
   return (
     <div>
-      <form action="">Search</form>
-      <div className="overflow-x-auto">
-        <table className="table table-zebra">
-          {/* head */}
-          <thead>
-            <tr>
-              <th></th>
-              <th>Title</th>
-              <th>Reserved By:</th>
-              <th>Action</th>
-              <th>Report Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* row 1 */}
-            <tr>
-              <th>{index + 1}</th>
-              <td className="font-bold">{data.name}</td>
-              <td>{data.email}</td>
-              <td>
-                <button
-                  className="btn btn-sm btn-error"
-                  onClick={() => handleCancel(data._id)}
-                >
-                  Cancel
-                </button>
-              </td>
-              <td>
-                {data.reportStatus === "pending" ? (
+      <div>
+        <div className="overflow-x-auto">
+          <table className="table table-zebra">
+            {/* head */}
+            <thead>
+              <tr>
+                <th></th>
+                <th>Title</th>
+                <th>Reserved By:</th>
+                <th>Action</th>
+                <th>Report Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* row 1 */}
+              <tr>
+                <th>{index + 1}</th>
+                <td className="font-bold">
+                  {" "}
+                  {data.reservationName?.map((name, index) => (
+                    <h2 key={index} className="card-title">
+                      {index + 1}. {name}
+                    </h2>
+                  ))}
+                </td>
+                <td>{data.email}</td>
+                <td>
                   <button
-                    className="btn btn-sm btn-success"
-                    onClick={() => handleSubmit(data._id)}
+                    className="btn btn-sm btn-error"
+                    onClick={() => handleCancel(data._id)}
                   >
-                    Submit
+                    Cancel
                   </button>
-                ) : (
-                  <p className="font-bold text-green-800 text-lg">Delivered</p>
-                )}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                </td>
+                <td>
+                  {data.reportStatus === "pending" ? (
+                    <button
+                      className="btn btn-sm btn-success"
+                      onClick={() => handleSubmit(data._id)}
+                    >
+                      Submit
+                    </button>
+                  ) : (
+                    <p className="font-bold text-green-800 text-lg">
+                      Delivered
+                    </p>
+                  )}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

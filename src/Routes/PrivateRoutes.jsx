@@ -17,9 +17,9 @@ const PrivateRoutes = ({ children }) => {
     },
   });
 
-  if (!userData?.user) {
-    return <Navigate to="/" replace></Navigate>;
-  }
+  /*   if (!userData?.user) {
+    return <Navigate to="/login" replace></Navigate>;
+  } */
 
   if (loading) {
     return "loading";

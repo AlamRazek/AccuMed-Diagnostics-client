@@ -68,7 +68,7 @@ const Dashboard = () => {
               <li>
                 <NavLink to="/dashboard/myAppoinment">
                   <FaCalendar></FaCalendar>
-                  My Upcoming Appointment
+                  Upcoming Appointment
                 </NavLink>
               </li>
               <li>

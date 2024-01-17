@@ -87,6 +87,7 @@ const CheckOutForm = () => {
           reservationId: resevations?.map((data) => data._id),
           reservationName: resevations?.map((data) => data.name),
           reservations: resevations,
+          reportStatus: "pending",
         };
 
         const res = await axiosSecure.post("/payments", payment);

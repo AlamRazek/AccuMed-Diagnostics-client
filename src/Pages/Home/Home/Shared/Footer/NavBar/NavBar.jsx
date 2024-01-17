@@ -39,17 +39,19 @@ const NavBar = () => {
         </NavLink>
       </li>
 
-      <li>
-        <NavLink
-          to="/dashboard"
-          style={({ isActive }) => ({
-            color: isActive ? "#fff" : "#545e6f",
-            background: isActive ? "#7600dc" : "",
-          })}
-        >
-          Dashboard
-        </NavLink>
-      </li>
+      {user ? (
+        <li>
+          <NavLink
+            to="/dashboard"
+            style={({ isActive }) => ({
+              color: isActive ? "#fff" : "#545e6f",
+              background: isActive ? "#7600dc" : "",
+            })}
+          >
+            Dashboard
+          </NavLink>
+        </li>
+      ) : null}
     </>
   );
 

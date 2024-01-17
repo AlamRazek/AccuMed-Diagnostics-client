@@ -4,8 +4,8 @@ import Banner from "./banner";
 
 const BannerImage = () => {
   const axiosSecure = useAxiosSecure();
-  const { data: banners = [], refetch } = useQuery({
-    queryKey: ["users"],
+  const { data: banners = [] } = useQuery({
+    queryKey: ["banners"],
     queryFn: async () => {
       const res = await axiosSecure.get("/banners");
       return res.data;
@@ -14,7 +14,7 @@ const BannerImage = () => {
 
   return (
     <div>
-      {banners.map((data) => (
+      {banners?.map((data) => (
         <Banner key={data._id} data={data}></Banner>
       ))}
     </div>

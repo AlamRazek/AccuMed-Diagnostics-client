@@ -87,7 +87,6 @@ const TestDetails = () => {
         if (response.data.modifiedCount > 0) {
           console.log("successful:", response.data);
         }
-        refetch();
       })
       .catch((error) => {
         console.log("error:", error);
