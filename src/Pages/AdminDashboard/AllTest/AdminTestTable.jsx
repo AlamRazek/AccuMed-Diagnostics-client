@@ -45,7 +45,6 @@ const AdminTestTable = ({ data }) => {
           <thead>
             <tr>
               <th>Name</th>
-              <th>All Reservations</th>
               <th>Action</th>
               <th>Update</th>
             </tr>
@@ -64,11 +63,7 @@ const AdminTestTable = ({ data }) => {
                   </div>
                 </div>
               </td>
-              <td>
-                <Link to={`/dashboard/reservations/${_id}`}>
-                  <button className="btn">Reservations</button>
-                </Link>
-              </td>
+
               <td>
                 <button
                   onClick={() => handleDelete(_id)}

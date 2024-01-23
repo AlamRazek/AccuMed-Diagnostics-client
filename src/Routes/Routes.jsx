@@ -63,7 +63,9 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         loader: async ({ params }) =>
-          await fetch(`http://localhost:5000/card/details/${params.id}`),
+          await fetch(
+            `https://accu-med-diagnostics-server.vercel.app/card/details/${params.id}`
+          ),
       },
 
       {
@@ -137,7 +139,9 @@ export const router = createBrowserRouter([
               </AdminRoutes>
             ),
             loader: async ({ params }) =>
-              await fetch(`http://localhost:5000/card/details/${params.id}`),
+              await fetch(
+                `https://accu-med-diagnostics-server.vercel.app/card/details/${params.id}`
+              ),
           },
           {
             path: "/dashboard/reservations",

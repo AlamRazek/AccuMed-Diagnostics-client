@@ -2,17 +2,15 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { FaTrash } from "react-icons/fa6";
 import Swal from "sweetalert2";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const AllBanner = () => {
-  const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
 
   const { data: banners = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/banners");
-      return res.data;
+      return res?.data;
     },
   });
 
@@ -61,7 +59,7 @@ const AllBanner = () => {
         <div className="flex justify-evenly my-4 shadow-lg py-4">
           <h2 className="text-3xl shadow-lg">All Banners</h2>
           <h2 className="text-3xl shadow-lg">
-            Total Banners: {banners.length}
+            Total Banners: {banners?.length}
           </h2>
         </div>
         <div className="overflow-x-auto">
