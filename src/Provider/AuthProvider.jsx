@@ -24,8 +24,7 @@ const AuthProvider = ({ children }) => {
   const axiosPublic = useAxiosPublic();
 
   // googl sign in
-  const googleSignIn = () => {
-    setLoading(true);
+  const googleSignIn = async () => {
     return signInWithPopup(auth, googleProvider);
   };
 
@@ -67,7 +66,7 @@ const AuthProvider = ({ children }) => {
         });
       } else {
         // todo: remove token(if token store in the client side: Local storage,caching,in memory)
-        localStorage.removeItem("item-token");
+        localStorage.removeItem("access-token");
       }
       setLoading(false);
     });

@@ -21,11 +21,24 @@ const Login = () => {
         navigate(location?.state ? location.state : "/");
       })
       .catch((err) => {
+        notify2(err.message);
+        console.log(err.message);
+      });
+  };
+
+  /*   const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((res) => {
+        notify1();
+        console.log(res);
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((err) => {
         // notify2(err.message);
         console.log(err.message);
         console.log(err);
       });
-  };
+  }; */
 
   const handleLogin = (e) => {
     e.preventDefault();
