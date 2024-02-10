@@ -15,6 +15,7 @@ const TestCards = ({ data }) => {
         <div className="card-body ">
           <h2 className="card-title justify-center">{name}</h2>
           <p className="card-title justify-center">${price}</p>
+
           <div className="card-actions justify-center">
             <Link to={`/card/details/${_id}`}>
               <button className="btn shadow-lg text-lg ">Details</button>

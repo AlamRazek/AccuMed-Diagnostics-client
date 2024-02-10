@@ -1,4 +1,5 @@
 import BannerImage from "../../AdminDashboard/Banner/BannerImage";
+import Promote from "../Promote/Promote";
 import Ratings from "../Ratings/ratings";
 import Swipper from "../SwipperJs/swipper";
 import AllTest from "./Services/AllTest";
@@ -13,8 +14,11 @@ const Home = () => {
       <div>
         <Swipper></Swipper>
       </div>
-      <div className="my-2 lg:my-4">
+      {/* <div className="my-2 lg:my-4">
         <Ratings></Ratings>
+      </div> */}
+      <div>
+        <Promote></Promote>
       </div>
     </div>
   );
