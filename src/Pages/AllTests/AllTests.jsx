@@ -9,6 +9,11 @@ const AllTests = () => {
   const [selectedDate, setSelectedDate] = useState(currentDate);
   const [filterTest, setFilterTest] = useState(test);
   const axiosPublic = useAxiosPublic();
+  const totalTest = test.length;
+  const itemsPerPage = 8;
+  const numberOfPages = Math.ceil(totalTest / itemsPerPage);
+  const pages = [...Array(numberOfPages).keys()];
+  const [currentPage, setCurrentPage] = useState();
 
   useEffect(() => {
     const currentDate = new Date();
@@ -53,32 +58,18 @@ const AllTests = () => {
         ))}
       </div>
       <div className="text-center my-2">
-        <div className="join ">
-          <input
-            className="join-item btn btn-square"
-            type="radio"
-            name="options"
-            aria-label="1"
-          />
-          <input
-            className="join-item btn btn-square"
-            type="radio"
-            name="options"
-            aria-label="2"
-          />
-          <input
-            className="join-item btn btn-square"
-            type="radio"
-            name="options"
-            aria-label="3"
-          />
-          <input
-            className="join-item btn btn-square"
-            type="radio"
-            name="options"
-            aria-label="4"
-          />
-        </div>
+        <p>Current page: {currentPage}</p>
+        {pages.map((page) => (
+          <div className="join " key={page}>
+            <input
+              onClick={() => setCurrentPage(page)}
+              className="join-item btn btn-square"
+              type="radio"
+              name="options"
+              aria-label={page.toString()}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
