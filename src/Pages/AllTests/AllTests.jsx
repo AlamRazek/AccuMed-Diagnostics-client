@@ -10,15 +10,13 @@ const AllTests = () => {
   const [filterTest, setFilterTest] = useState(test);
   const axiosPublic = useAxiosPublic();
   const totalTest = test.length;
-  const itemsPerPage = 8;
+  const itemsPerPage = 9;
   const numberOfPages = Math.ceil(totalTest / itemsPerPage);
   const pages = [...Array(numberOfPages).keys()];
   const [currentPage, setCurrentPage] = useState();
 
   useEffect(() => {
-    fetch(
-      `https://accu-med-diagnostics-server.vercel.app/test?page=${currentPage}&size=${itemsPerPage}`
-    )
+    fetch(`http://localhost:5000/test?page=${currentPage}&size=${itemsPerPage}`)
       .then((res) => res.json())
       .then((data) => setFilterTest(data));
   }, [currentPage, itemsPerPage]);
