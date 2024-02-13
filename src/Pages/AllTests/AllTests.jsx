@@ -16,6 +16,14 @@ const AllTests = () => {
   const [currentPage, setCurrentPage] = useState();
 
   useEffect(() => {
+    fetch(
+      `https://accu-med-diagnostics-server.vercel.app/test?page=${currentPage}&size=${itemsPerPage}`
+    )
+      .then((res) => res.json())
+      .then((data) => setFilterTest(data));
+  }, [currentPage, itemsPerPage]);
+
+  useEffect(() => {
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().split("T")[0];
     setCurrentDate(formattedDate);
